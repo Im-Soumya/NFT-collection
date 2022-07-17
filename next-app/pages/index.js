@@ -3,7 +3,6 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import React, { useState, useEffect, useRef } from "react";
 import { NFTContractAddress, NFTContractABI } from "../constants";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -229,51 +228,73 @@ export default function Home() {
   const renderButton = () => {
     if (!walletConnected) {
       return (
-        <div>
-          <button onClick={connectWallet}>Connect Wallet</button>
+        <div className="flex justify-center items-center">
+          <button
+            className="py-3 px-20 text-lg font-semibold rounded-md bg-indigo-500"
+            onClick={connectWallet}
+          >
+            Connect Wallet
+          </button>
         </div>
       );
     }
 
     if (loading) {
       return (
-        <div>
-          <button>Loading...</button>
+        <div className="flex justify-center items-center">
+          <button className="py-3 px-20 text-lg font-semibold rounded-md bg-indigo-500">
+            Loading...
+          </button>
         </div>
       );
     }
 
     if (isOwner && !presaleStarted) {
       return (
-        <div>
-          <button onClick={startPresale}>Start presale</button>
+        <div className="flex justify-center items-center">
+          <button
+            className="py-3 px-20 text-lg font-semibold rounded-md bg-indigo-500"
+            onClick={startPresale}
+          >
+            Start presale
+          </button>
         </div>
       );
     }
 
     if (!presaleStarted) {
       return (
-        <div>
-          <p>Presale not yet started</p>
+        <div className="flex justify-center items-center">
+          <p className="text-xl text-white">Presale not yet started</p>
         </div>
       );
     }
 
     if (presaleStarted && !presaleEnded) {
       return (
-        <div>
+        <div className="flex justify-center items-center">
           <div>
             Presale has started! If you are in whitelist then mint a NFT! 🥳
           </div>
-          <button onClick={presaleMint}>Presale Mint 🚀</button>
+          <button
+            className="py-3 px-20 text-lg font-semibold rounded-md bg-indigo-500"
+            onClick={presaleMint}
+          >
+            Presale Mint 🚀
+          </button>
         </div>
       );
     }
 
     if (presaleStarted && presaleEnded) {
       return (
-        <div>
-          <button onClick={publicMint}>Public Mint 🚀</button>
+        <div className="flex justify-center item-center">
+          <button
+            className="py-3 px-20 text-lg font-semibold rounded-md bg-indigo-500"
+            onClick={publicMint}
+          >
+            Public Mint 🚀
+          </button>
         </div>
       );
     }
@@ -286,24 +307,23 @@ export default function Home() {
         <meta name="description" content="Whitelist-Dapp" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.main}>
-        <div>
-          <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
-          <div className={styles.description}>
+      <div className="h-screen bg-zinc-800 text-white ">
+        <div className="h-full flex-col justify-center items-center">
+          <h1 className="text-5xl font-semibold text-center pt-44">
+            Welcome to Crypto Devs!
+          </h1>
+          <div className="text-center pt-10 pb-8 text-xl">
             Its an NFT collection for developers in Crypto.
           </div>
-          <div className={styles.description}>
+          <div className="text-center text-xl pb-10">
             {tokensMinted}/20 have been minted
           </div>
           {renderButton()}
         </div>
-        {/* <div>
-          <img className={styles.image} src="./cryptodevs/0.svg" />
-        </div> */}
       </div>
 
-      <footer className={styles.footer}>
-        Made with &#10084; by Crypto Devs
+      <footer className="bg-zinc-700 py-3 text-white text-center">
+        Made with <span className="text-red-600">&#10084;</span> by Crypto Devs
       </footer>
     </div>
   );
