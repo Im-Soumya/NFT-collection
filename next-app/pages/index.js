@@ -137,10 +137,10 @@ export default function Home() {
         provider
       );
 
-      const _owner = await nftContract.getOwner();
+      const _owner = await nftContract.owner();
 
       const signer = await getProviderOrSigner(true);
-      const address = signer.getAddress();
+      const address = await signer.getAddress();
 
       if (_owner.toLowerCase() === address.toLowerCase()) {
         setIsOwner(true);
@@ -272,8 +272,8 @@ export default function Home() {
 
     if (presaleStarted && !presaleEnded) {
       return (
-        <div className="flex justify-center items-center">
-          <div>
+        <div className="flex-col justify-center items-center text-center">
+          <div className="text-xl pb-4">
             Presale has started! If you are in whitelist then mint a NFT! 🥳
           </div>
           <button
