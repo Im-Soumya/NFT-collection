@@ -11,8 +11,9 @@ const main = async () => {
   console.log("Contract deployed at: ", nftContract.address);
 
   let txn = await nftContract.startPresale();
+  await txn.wait();
 
-  txn = await nftContract.mint();
+  txn = await nftContract.presaleMint();
   console.log("Minting...");
   await txn.wait();
   console.log("Minted");
